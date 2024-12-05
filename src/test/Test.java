@@ -27,7 +27,7 @@ public class Test {
 		MyUtils.println("---Test Vector Math---");
 		float[] tab1 = {1f,2f,3f};
 		float[] tab2 = {3f,2f,1f};
-		float[] tab3 = {1f,1f,1f};
+		float[] tab3 = {4f,4f,4f};
 		VectorMath vec = new VectorMath(tab1.clone());
 		MyUtils.println("vec :"+vec.toString());
 		assert vec.get(0) == 1f;

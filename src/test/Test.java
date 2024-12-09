@@ -5,7 +5,6 @@ import java.time.Instant;
 import java.util.function.Function;
 import linear_algebra.VectorMath;
 import linear_algebra.VectorSpace;
-import my_utils.MathUtil;
 import my_utils.MyUtils;
 
 public class Test extends MyUtils {
@@ -20,23 +19,6 @@ public class Test extends MyUtils {
 		return timeElapsed;
 	}
 
-    public static void test_math_utils() {
-        MyUtils.println("---Test Math Utils---");
-        float base = 0f;
-        int exponent = 20;
-        assert MathUtil.powi(base, exponent) == base;
-
-		base = 2f;
-		exponent = 10;
-		assert MathUtil.powi(base, exponent) == 1024f;
-
-		exponent = -10;
-
-		assert MathUtil.powi(base, exponent) == 1/1024f;
-		MyUtils.println("\t=> Ok ✅");
-
-
-    }
 
     public static void test_vector_space() {
         MyUtils.println("---Test Vector Space---");
@@ -66,18 +48,24 @@ public class Test extends MyUtils {
         float[] tab4 = {1f, 2f, 3f};
         VectorMath vec4 = new VectorMath(tab4);
         VectorMath vec = new VectorMath(tab1.clone());
+
+	//test equal
         assert vec.equals(vec4);
 
+	//test toString
 		assert vec.toString().equals("<[1.0, 2.0, 3.0]>");
 
+	//test get/set
 		assert vec.get(0) == 1f;
         assert vec.set(0, 0f).get(1) == 2f;
         assert vec.get(0) == 0f;
 
+	//test scale
         assert vec.scale_set(5f).get(2) == 15f;
         assert vec.scale(2f) != vec;
 
 
+	//test add
         VectorMath vec1 = new VectorMath(tab1);
         VectorMath vec2 = new VectorMath(tab2);
 
@@ -86,15 +74,20 @@ public class Test extends MyUtils {
         assert (vec1.add(vec2).equals(vec3));
 		MyUtils.println("\t=> Ok ✅");
 
+	//test dot
+		float[] tabOfOnes = {1f,1f,1f};
+		VectorMath vecOfOnes = new VectorMath(tabOfOnes);
+		assert vecOfOnes.dot(vecOfOnes) == 3;
 
+		assert vec1.dot(vec2) == 10;
+		assert vec2.dot(vec1) == 10;
+		assert vec3.dot(vec1) == 24;
     }
 
     public static void main(String[] args) {
 		MyUtils.println("<======démarage test======>");
 		Instant start = Instant.now();
-
-		test_math_utils();
-        
+       
         test_vector_space();
 
         test_vector_math();

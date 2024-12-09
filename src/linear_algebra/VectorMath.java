@@ -72,6 +72,7 @@ public class VectorMath extends VectorSpace{
     }
 
     public VectorMath add_set(VectorMath other){
+        assert other.dimension == this.dimension;
         for(int i = 0; i<dimension; i++){
             this.set(i, this.get(i) + other.get(i));
         }
@@ -83,6 +84,15 @@ public class VectorMath extends VectorSpace{
         VectorMath result = new VectorMath(this);
 
         return result.add_set(other);
+    }
+
+    public float dot(VectorMath other){
+        assert other.dimension == this.dimension;
+        float result = 0f;
+        for(int i = 0; i< dimension; i++){
+            result += this.innerTab[i] * other.innerTab[i];
+        }
+        return result;
     }
 
     @Override
@@ -108,9 +118,9 @@ public class VectorMath extends VectorSpace{
         float result = 0f;
 
         for(int i=0;i<dimension;i++)
-            result+=  innerTab[i];
+            result+=  innerTab[i]*innerTab[i];
 
-        return result;
+        return (float) Math.sqrt(result);
     }
     
 }

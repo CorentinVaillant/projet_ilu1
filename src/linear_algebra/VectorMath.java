@@ -6,11 +6,8 @@ import java.util.Arrays;
 public class VectorMath extends VectorSpace{
     
     private float innerTab[];
-    
-
 
     //------>constructors<------
-
 
     public VectorMath(ArrayList<Float> vec, int size) {
         super(size);
@@ -57,8 +54,6 @@ public class VectorMath extends VectorSpace{
         return "<"+Arrays.toString(innerTab)+">";
     }
 
-
-
     //----->maths<-----
     public VectorMath scale_set(float scalar){
         
@@ -92,7 +87,10 @@ public class VectorMath extends VectorSpace{
 
     @Override
     public boolean equals(Object obj) {
-        if (obj.getClass() != this.getClass())
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || obj.getClass() != this.getClass())
             return false;
             
         VectorMath other = (VectorMath) obj;
@@ -104,4 +102,15 @@ public class VectorMath extends VectorSpace{
         }
         return true;
     }
+
+
+    public float lenght(){
+        float result = 0f;
+
+        for(int i=0;i<dimension;i++)
+            result+=  innerTab[i];
+
+        return result;
+    }
+    
 }

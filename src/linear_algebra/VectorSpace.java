@@ -34,5 +34,4 @@ public class VectorSpace {
         return dimension == vecSpace.dimension;
     }
 
-
 }

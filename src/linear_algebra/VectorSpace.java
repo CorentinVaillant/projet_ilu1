@@ -4,7 +4,8 @@ package linear_algebra;
 
 ///class
 /// This class is a pattern for other object that represent some element in a vector space
-public class VectorSpace {
+public class VectorSpace<THIS extends VectorSpace<THIS>> {
+
 
     protected int dimension;
 
@@ -12,13 +13,17 @@ public class VectorSpace {
         this.dimension = dimension;
     }
 
-    public VectorSpace scale(float scalar){
-        return new VectorSpace(this.dimension);
+    public THIS scale(float scalar){
+        return null;
     }
 
-    public VectorSpace add(VectorSpace vecSpace){
-        assert(this.dimension == vecSpace.dimension);
-        return new VectorSpace(this.dimension);
+    public THIS add(THIS other){
+        assert(this.dimension == other.dimension);
+        return null;
+    }
+
+    public THIS substract(THIS other){
+        return null;
     }
 
     public int getDimension() {
@@ -30,7 +35,7 @@ public class VectorSpace {
         return "Vector space of dimension "+dimension;
     }
 
-    public boolean isHomeomorphic(VectorSpace vecSpace){
+    public <OTHER extends  VectorSpace<OTHER>> boolean isHomeomorphic(VectorSpace<OTHER> vecSpace){
         return dimension == vecSpace.dimension;
     }
 

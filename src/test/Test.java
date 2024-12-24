@@ -4,7 +4,6 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.function.Function;
 import linear_algebra.VectorMath;
-import linear_algebra.VectorSpace;
 import my_utils.MyUtils;
 
 public class Test extends MyUtils {
@@ -19,25 +18,6 @@ public class Test extends MyUtils {
 		return timeElapsed;
 	}
 
-
-    public static void test_vector_space() {
-        MyUtils.println("---Test Vector Space---");
-
-        VectorSpace vecSpace1 = new VectorSpace(5);
-        assert (vecSpace1.getDimension() == 5);
-
-        assert (vecSpace1.add(vecSpace1).isHomeomorphic(vecSpace1));
-
-        VectorSpace vecSpace2 = new VectorSpace(6);
-        // vecSpace1.add(vecSpace2); //!Test if it stop the programme, to comment to do other test
-
-        assert (vecSpace1 != vecSpace2);
-
-        assert vecSpace1.toString().equals("Vector space of dimension 5");
-        assert vecSpace2.toString().equals("Vector space of dimension 6");
-		MyUtils.println("\t=> Ok ✅");
-        
-    }
 
     public static void test_vector_math() {
         println("---Test Vector Math---");
@@ -87,9 +67,6 @@ public class Test extends MyUtils {
     public static void main(String[] args) {
 		MyUtils.println("<======démarage test======>");
 		Instant start = Instant.now();
-       
-        test_vector_space();
-
         test_vector_math();
 
 		Instant end = Instant.now();

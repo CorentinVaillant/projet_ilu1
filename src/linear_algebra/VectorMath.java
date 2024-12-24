@@ -3,9 +3,9 @@ package linear_algebra;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class VectorMath extends VectorSpace{
+public class VectorMath extends EuclidianSpace<VectorMath>{
     
-    private float innerTab[];
+    private final float innerTab[];
 
     //------>constructors<------
 
@@ -27,6 +27,15 @@ public class VectorMath extends VectorSpace{
         super(other.dimension);
         this.innerTab = other.innerTab.clone();
     }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        super.clone();
+        return new VectorMath(this);
+        
+    }
+
+    
 
 
     //------>getter<------
@@ -54,46 +63,8 @@ public class VectorMath extends VectorSpace{
         return "<"+Arrays.toString(innerTab)+">";
     }
 
-    //----->maths<-----
-    public VectorMath scale_set(float scalar){
-        
-        for(int i = 0; i<dimension; i++){
-            this.set(i, this.get(i) * scalar);
-        }
+    //----->other<-----
 
-        return this;
-    }
-
-    @Override
-    public VectorMath scale(float scalar){
-        VectorMath result = new VectorMath(this);
-
-        return result.scale_set(scalar);
-    }
-
-    public VectorMath add_set(VectorMath other){
-        assert other.dimension == this.dimension;
-        for(int i = 0; i<dimension; i++){
-            this.set(i, this.get(i) + other.get(i));
-        }
-
-        return this;
-    }
-
-    public VectorMath add(VectorMath other) {
-        VectorMath result = new VectorMath(this);
-
-        return result.add_set(other);
-    }
-
-    public float dot(VectorMath other){
-        assert other.dimension == this.dimension;
-        float result = 0f;
-        for(int i = 0; i< dimension; i++){
-            result += this.innerTab[i] * other.innerTab[i];
-        }
-        return result;
-    }
 
     @Override
     public boolean equals(Object obj) {
@@ -113,7 +84,63 @@ public class VectorMath extends VectorSpace{
         return true;
     }
 
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 
+
+/********************************************************
+ <=================== Mathematics ======================>
+********************************************************/
+
+    //---->VectorSpace<----
+    
+    public VectorMath scale_set(float scalar){
+        
+        for(int i = 0; i<dimension; i++){
+            this.set(i, this.get(i) * scalar);
+        }
+
+        return this;
+    }
+
+    public VectorMath add_set(VectorMath other){
+        assert other.dimension == this.dimension;
+        for(int i = 0; i<dimension; i++){
+            this.set(i, this.get(i) + other.get(i));
+        }
+
+        return this;
+    }
+
+    @Override
+    public VectorMath scale(float scalar) {
+        VectorMath result = new VectorMath(this);
+
+        return result.scale_set(scalar);
+    }
+
+    @Override
+    public VectorMath add(VectorMath other) {
+        VectorMath result = new VectorMath(this);
+
+        return result.add_set(other);
+    }
+
+    //---->EuclidianSpace<----
+
+    @Override
+    public float dot(VectorMath other){
+        assert other.dimension == this.dimension;
+        float result = 0f;
+        for(int i = 0; i< dimension; i++){
+            result += this.innerTab[i] * other.innerTab[i];
+        }
+        return result;
+    }
+
+    @Override
     public float lenght(){
         float result = 0f;
 
@@ -122,5 +149,7 @@ public class VectorMath extends VectorSpace{
 
         return (float) Math.sqrt(result);
     }
+
+
     
 }
